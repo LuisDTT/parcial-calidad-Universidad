@@ -1,0 +1,35 @@
+name: CI-Quality
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  parcial:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Configuracion de Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Instalacion de dependencias
+        run: npm install
+
+      - name: Linter
+        run: npm run lint
+
+      - name: Pruebas unitarias
+        run: npm test -- --ci
+
+      - name: Cobertura y validacion de umbral
+        run: npm run coverage
+
+      - name: Build project
+        run: npm run build
