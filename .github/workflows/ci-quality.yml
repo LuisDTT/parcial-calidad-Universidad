@@ -31,5 +31,5 @@ jobs:
       - name: Cobertura y validacion de umbral
         run: npm run coverage
 
-      - name: Build project
+      - name: Build
         run: npm run build
